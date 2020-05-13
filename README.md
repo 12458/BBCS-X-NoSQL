@@ -37,7 +37,7 @@ Optional: Storing MongoDB’s data inside /workspace ensures that it will get ba
 
 Next, edit README.md and change the `<username>`in the following line of markdown to your Github username such that you can click the button to open Gitpod.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/joelleoqiyi/BBCS-X-NoSQL)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/12458/BBCS-X-NoSQL)
 
 Once you changed README.md, click the button above.
 

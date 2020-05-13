@@ -1,21 +1,21 @@
-import _____
-from _____ import ______
-uri = "_________________________________" #add in your MongoDB connection string here
+import pymongo
+from pymongo import MongoClient
+uri = "mongodb+srv://user:RtbNqkZV4b86QBdw@cluster0-1vo38.mongodb.net/test?retryWrites=true&w=majority" #add in your MongoDB connection string here
 cluster = MongoClient(uri)
 
-db = cluster["__________"] #insert name of database you created earlier here
-collection = db["__________"] #insert name of collection you created earlier here
+db = cluster["suspect_database"] #insert name of database you created earlier here
+collection = db["suspect"] #insert name of collection you created earlier here
 
-result = collection.___(
-            _____ = {"$and" : [
+result = collection.find(
+            filter = {"$and" : [
                 {"age": {"$gte": 20, "$lt": 30}},
                 {"company": {"$in": ["PRINTSPAN", "TECHMANIA", "NEPTIDE", "MULTRON", "SKYNET", "UPDAT", "STANTON"]}},
                 {"eyeColor": {"$nin": ["black", "brown"]}},
                 {"friends.name": {"$regex": "^C"}}
             ]},
-            _____ = {
-                "____": ____,
-                "____": ____
+            projection = {
+                "name": 1,
+                "_id": 0
             }
         )
 

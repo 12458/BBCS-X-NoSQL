@@ -1,24 +1,29 @@
-import _____
-from _____ import ______
-uri = "_________________________________" #add in your MongoDB connection string here
+import pymongo
+from pymongo import MongoClient
+# add in your MongoDB connection string here
+uri = "mongodb+srv://user:RtbNqkZV4b86QBdw@cluster0-1vo38.mongodb.net/test?retryWrites=true&w=majority"
 cluster = MongoClient(uri)
 
-db = cluster["__________"] #insert name of database you created earlier here
-collection = db["__________"] #insert name of collection you created earlier here
+# insert name of database you created earlier here
+db = cluster["suspect_database"]
+# insert name of collection you created earlier here
+collection = db["suspect"]
 
 pipeline = [
-    {"$___": {"$___" : [
-        {"______": {"$___": 20, "__": 30}},
-        {"______": {"$___": ["PRINTSPAN", "TECHMANIA", "NEPTIDE", "MULTRON", "SKYNET", "UPDAT", "STANTON"]}},
-        {"______": {"$___": ["black", "brown"]}},
-        {"______": {"$___": "^C"}}
+    {"$match": {"$and": [
+        {"age": {"$gte": 20, "$lt": 30}},
+        {"company": {"$in": ["PRINTSPAN", "TECHMANIA",
+                             "NEPTIDE", "MULTRON", "SKYNET", "UPDAT", "STANTON"]}},
+        {"eyeColour": {"$nin": ["black", "brown"]}},
+        {"friends.name": {"$regex": "^C"}},
+        {"gender": "female"}
     ]}},
-    {"$____":
-        {"______": 1, "______": 0}}
+    {"$project":
+        {"name": 1, "_id": 0}}
 ]
 
-#time to use the pipeline!
-#Note: pipeline aggregation returns you a cursor object to the MongoDB database so you need to iterate through result to get the actual values.
-result = collection.______(pipeline)
+# time to use the pipeline!
+# Note: pipeline aggregation returns you a cursor object to the MongoDB database so you need to iterate through result to get the actual values.
+result = collection.aggregate(pipeline)
 for i in result:
-    print (i)
+    print(i)
